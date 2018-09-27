@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} sword {% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<ul>
+    <li>
+        <a href="{{ path('homepage') }}">Accueil</a>
+    </li>
+</ul>
+<h1>Epée {{sword_id}}</h1>
+
+</body>
+
+</html>
