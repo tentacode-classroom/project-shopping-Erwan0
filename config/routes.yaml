@@ -2,4 +2,13 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+home:
+    path: /
+    controller: App\Controller\SwordController::sword
 
+album:
+    path: /detail/{swordId}
+    controller: App\Controller\SwordAlbumController::index
+
+logout:
+    path: /logout

@@ -1,30 +1,24 @@
 <?php
 
 namespace App\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\SwordRepository;
+use App\Entity\Sword;
 
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/", name = "homepage")
+     * @Route("/", name="homepage")
      */
-    public function home()
+    public function index()
     {
-        $sword = [
-            [
-                'name' => 'sword',
-                'id' => 1,
-            ],
-            [
-                'name' => 'sword1',
-                'id' => 2,
-            ],
-        ];
-
-        return $this->render("/homepage/index.html.twig", [
-            'sword' => $sword,
-        ]);
+        $swords = $this->getDoctrine()
+            ->getRepository(Sword::class)
+            ->findBy([], ['price' => 'DESC']);
+        if (!$swords){
+            throw $this->createNotFoundException('There is no product in the database');
+        }
+        return $this->render('homepage.html.twig', ['swords' => $swords]);
     }
 }
